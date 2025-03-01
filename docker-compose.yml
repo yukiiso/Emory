@@ -66,6 +66,20 @@ services:
       - ./frontend:/app  # ローカルディレクトリをコンテナ内にマウント
     working_dir: /app
     command: ["npm", "start"]  # React アプリを起動
+
+  dynamodb-local:
+    image: amazon/dynamodb-local
+    container_name: dynamodb_local
+    ports:
+      - "${DYNAMODB_LOCAL_PORT}:${DYNAMODB_LOCAL_PORT}"  # DynamoDB Local のポートを環境変数から取得
+    environment:
+      - DB_PATH=/home/dynamodblocal/data
+    volumes:
+      - dynamodb-local-data:/home/dynamodblocal/data  # データの永続化
+    command: ["-jar", "DynamoDBLocal.jar", "-inMemory", "-sharedDb"]  # インメモリモードで起動
+
+  
 volumes:
   mysqldata:
   mysqldata_test:
+  dynamodb-local-data: 
