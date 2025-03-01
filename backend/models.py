@@ -13,9 +13,9 @@ class User(db.Model):
     email           = db.Column(db.String(255), unique=True, nullable=False)
     password        = db.Column(db.String(255), nullable=False)
     
-    records         = db.relationship('Record', backref='user', lazy=True)
-    face_analyses   = db.relationship('FaceAnalysis', backref='user', lazy=True)
-    voice_analyses  = db.relationship('VoiceAnalysis', backref='user', lazy=True)
+    records         = db.relationship('Record', backref='user_record', lazy=True)
+    face_analyses   = db.relationship('FaceAnalysis', backref='user_face', lazy=True)
+    voice_analyses  = db.relationship('VoiceAnalysis', backref='user_voice', lazy=True)
 
 class Question(db.Model):
     __tablename__   = 'question'
@@ -23,8 +23,8 @@ class Question(db.Model):
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
     content         = db.Column(db.Text, nullable=False)
     
-    face_analyses   = db.relationship('FaceAnalysis', backref='question', lazy=True)
-    voice_analyses  = db.relationship('VoiceAnalysis', backref='question', lazy=True)
+    face_analyses   = db.relationship('FaceAnalysis', backref='question_analysis', lazy=True)
+    voice_analyses  = db.relationship('VoiceAnalysis', backref='question_voice', lazy=True)
 
 class Record(db.Model):
     __tablename__ = 'record'
@@ -35,7 +35,7 @@ class Record(db.Model):
     a_name          = db.Column(db.String(255))  # Audio name "username_qid_a"
     date            = db.Column(db.DateTime, default=db.func.current_timestamp())
     
-    user            = db.relationship('User', backref='record', lazy=True)
+    user            = db.relationship('User', backref='record_user', lazy=True)
 
 class FaceAnalysis(db.Model):
     __tablename__ = 'face_analysis'
@@ -51,7 +51,7 @@ class FaceAnalysis(db.Model):
     smile           = db.Column(db.Float, default=0.0)
     
     user            = db.relationship('User', backref='face_analysis', lazy=True)
-    question        = db.relationship('Question', backref='face_analysis', lazy=True)
+    question        = db.relationship('Question', backref='face_analysis_question', lazy=True)
 
 class VoiceAnalysis(db.Model):
     __tablename__ = 'voice_analysis'
