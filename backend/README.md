@@ -52,9 +52,11 @@ RDSのMySQLが2つ(mysql_db, mysql_test_db)と、NoSQLのDynamoDBU(dynamodb_loca
 [Record](http://localhost:5001/api/db/sql/Record)
 [FaceAnalysis](http://localhost:5001/api/db/sql/FaceAnalysis)
 [VoiceAnalysis](http://localhost:5001/api/db/sql/VoiceAnalysis)
+DBスキーマ変更したらコードいじる必要あるから注意。  
 
 Dynamo用の確認APIは明日作る
 
+Migrationは消したから、migrations/は消してよし。  
 
 ### テストについて
 ```pytest```で呼び出せる。
