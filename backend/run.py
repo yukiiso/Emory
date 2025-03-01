@@ -1,6 +1,3 @@
-import sys
-sys.path.append("/emory/backend")  # ✅ backend をパスに追加
-
 from app import create_app
 
 app = create_app()
