@@ -20,6 +20,3 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # 6️⃣ ソースコードをコピー
 COPY . .
-
-# 7️⃣ Flask の起動コマンドを設定
-CMD ["sh", "-c", "sleep 5 && python backend/run.py"]

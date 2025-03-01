@@ -9,9 +9,10 @@ services:
     env_file:
       - config.env  
     environment:
-      - PYTHONPATH=/emory/backend  # ✅ backend を Python モジュールとして認識
+      - PYTHONPATH=/emory  # ✅ backend を Python モジュールとして認識
     depends_on:
       - mysql
+      - mysql_test  # ✅ テスト用 MySQL に依存
     volumes:
       - .:/emory  # ✅ ルートディレクトリを `/emory` としてマウント
     command: ["sh", "-c", "sleep 5 && python backend/run.py"]
@@ -34,5 +35,22 @@ services:
     volumes:
       - mysqldata:/var/lib/mysql
 
+  mysql_test:
+    image: mysql:8.0
+    container_name: mysql_test_db
+    restart: always
+    env_file:
+      - ./config.env
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD_test}"
+      MYSQL_DATABASE: "${DB_NAME_test}"
+      MYSQL_USER: "${DB_USER_test}"
+      MYSQL_PASSWORD: "${DB_PASSWORD_test}"
+    ports:
+      - "${DB_PORT_test}:${DB_PORT_test}"
+    volumes:
+      - mysqldata_test:/var/lib/mysql
+
 volumes:
   mysqldata:
+  mysqldata_test:

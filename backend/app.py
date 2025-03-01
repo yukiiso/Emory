@@ -1,26 +1,33 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from config import FLASK_ENV, FLASK_DEBUG, SQLALCHEMY_DATABASE_URI
-from models import db
+from backend.routes import register_blueprints
+from backend.config import FLASK_ENV, FLASK_DEBUG, SQLALCHEMY_DATABASE_URI, SQLALCHEMY_DATABASE_URI_TEST
+from backend.models import db
 from flask_cors import CORS
 import os
 
-def create_app():
+def create_app(test=False):
     """Flask アプリを作成するファクトリ関数"""
     app = Flask(__name__)
     CORS(app)
 
-    print(f"Running in {FLASK_ENV} mode")
-    print(f"DB_HOST: {os.getenv('DB_HOST')}")
-    print(f"DB_PORT: {os.getenv('DB_PORT')}")
-    print(f"SQLALCHEMY_DATABASE_URI: {SQLALCHEMY_DATABASE_URI}")
-
-    # 環境設定を適用
-    app.config["ENV"] = FLASK_ENV
-    app.config["DEBUG"] = FLASK_DEBUG
-    app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    if test:
+        # ✅ テスト環境用の設定
+        print("Running in TEST mode")
+        app.config["ENV"] = "test"
+        app.config["DEBUG"] = True
+        app.config["TESTING"] = True
+        app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI_TEST
+        app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    else:
+        # ✅ 開発・本番環境用の設定
+        print(f"Running in {FLASK_ENV} mode")
+        app.config["ENV"] = FLASK_ENV
+        app.config["DEBUG"] = FLASK_DEBUG
+        app.config["TESTING"] = False
+        app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+        app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     # DB の初期化
     db.init_app(app)
@@ -29,13 +36,13 @@ def create_app():
     with app.app_context():
         from flask_migrate import upgrade
 
-        try:
-            upgrade()  # 変更を適用
-        except Exception as e:
-            print(f"Migration Error: {e}")
+        if not test:
+            # ✅ テスト時にはマイグレーションを適用しない
+            try:
+                upgrade()  # 変更を適用
+            except Exception as e:
+                print(f"Migration Error: {e}")
 
-    @app.route("/health", methods=["GET"])
-    def health_check():
-        return jsonify({"status": "ok", "message": "Flask backend is running!"})
-
+    register_blueprints(app)
+    
     return app

@@ -1,15 +1,20 @@
+import os
+import sys
 import pytest
-from backend.run import app, db
+
+# `Emory/` を PYTHONPATH に追加
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + "/../.."))
+
+from backend.app import create_app
+from backend.models import db
 
 @pytest.fixture(scope="function")
 def test_client():
-    # テスト用の Flask アプリをセットアップ
-    app.config["ENV"] = "test"
-    app.config["TESTING"] = True
+    """テスト用の Flask クライアントを作成"""
+    app = create_app(test=True)
 
-    # テスト用データベースを作成
     with app.app_context():
         db.create_all()
         yield app.test_client()
         db.session.remove()
-        db.drop_all()  # テスト後にデータを削除
+        db.drop_all()
