@@ -1,30 +1,31 @@
-from models import db, User, Session, UserResponse
+from backend.models import db, User, Question, Record, FaceAnalysis, VoiceAnalysis
 
-def seed_database():
+def seed_database(app):
     """初回の Seed Data を投入"""
-    if User.query.first():  # すでにデータがある場合はスキップ
-        print("✅ Seed Data はすでに投入済みです")
-        return
+    print("Seeding SQL and DynamoDB data...")
 
-    # ユーザーの追加
-    user1 = User(name="Alice", email="alice@example.com")
-    user2 = User(name="Bob", email="bob@example.com")
+    with app.app_context():
+        seed_sql_data(db, User, Question, Record, FaceAnalysis, VoiceAnalysis)
+        seed_dynamo_data()
 
-    db.session.add_all([user1, user2])
-    db.session.commit()
+    print("Seeding completed.")
 
-    # セッションの追加
-    session1 = Session(user_id=user1.id)
-    session2 = Session(user_id=user2.id)
+def seed_sql_data(db, User, Question, Record, FaceAnalysis, VoiceAnalysis):
+    """SQL データベースにシードデータを挿入する"""
+    
+    try:
+        # Check if any users already exist in the SQL database
+        if not User.query.first():  # Check if the 'users' table is empty
+            user1 = User(name='Alice', age=30, gender='Female', username='alice', email='alice@example.com', password='hashed_password')
+            user2 = User(name='Bob', age=25, gender='Male', username='bob', email='bob@example.com', password='hashed_password')
+            db.session.add_all([user1, user2])
+            db.session.commit()
+            print("SQL data seeded successfully.")
+        else:
+            print("SQL data already exists. Skipping seed.")
+    except Exception as e:
+        print(f"Error seeding SQL data: {e}")
 
-    db.session.add_all([session1, session2])
-    db.session.commit()
+def seed_dynamo_data(): 
 
-    # ユーザー回答の追加
-    response1 = UserResponse(user_id=user1.id, session_id=session1.id, response_text="Feeling good!")
-    response2 = UserResponse(user_id=user2.id, session_id=session2.id, response_text="Not so great.")
-
-    db.session.add_all([response1, response2])
-    db.session.commit()
-
-    print("✅ Seed Data の投入が完了しました！")
+    return
