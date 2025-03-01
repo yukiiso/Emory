@@ -29,12 +29,12 @@ const SignUp = () => {
     return (
         <div className={styles["page-container"]}>
             <div className={styles["links-container"]}>
-                    <Link to="/sign-in" className={`${styles["link-signin"]} ${styles.link}`}>Sign In</Link>
-                    <Link to="/sign-up" className={styles.link}>Sign Up</Link>
-                </div>
+                <Link to="/sign-in" className={`${styles["link-signin"]} ${styles.link}`}>Sign In</Link>
+                <Link to="/sign-up" className={styles.link}>Sign Up</Link>
+            </div>
             <div className={styles["form-container"]}>
             <form onSubmit={handleSubmit}>
-            <h1>Create an Account</h1>
+            <h1 className={styles.title}>Create an Account</h1>
                 <div>
                     <label>Name: </label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required />

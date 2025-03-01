@@ -22,7 +22,7 @@ const SignIn = () => {
 			</div>
 			<div className={styles["form-container"]}>
 			<form onSubmit={handleSubmit}>
-			<h1>Sign In</h1>
+			<h1 className={styles.title}>Sign In</h1>
 				<div>
 					<label>Username: </label>
 					<input className={styles.input} type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
