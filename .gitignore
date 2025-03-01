@@ -13,3 +13,6 @@ migrations
 
 # node_modules
 node_modules
+
+# Service Account Key for GCS
+hackathon2025-452403-29a59f9b7f44.json
