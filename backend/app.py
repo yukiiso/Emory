@@ -32,6 +32,7 @@ def create_app(test=False):
     # DB の初期化
     db.init_app(app)
     migrate = Migrate(app, db)
+    migrate.init_app(app, db)
 
     with app.app_context():
         from flask_migrate import upgrade
@@ -39,6 +40,7 @@ def create_app(test=False):
         if not test:
             # ✅ テスト時にはマイグレーションを適用しない
             try:
+                db.create_all()
                 upgrade()  # 変更を適用
             except Exception as e:
                 print(f"Migration Error: {e}")
