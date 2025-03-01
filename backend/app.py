@@ -1,10 +1,9 @@
 from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from backend.routes import register_blueprints
 from backend.config import FLASK_ENV, FLASK_DEBUG, SQLALCHEMY_DATABASE_URI, SQLALCHEMY_DATABASE_URI_TEST
 from backend.models import db
 from flask_cors import CORS
-import os
+from backend.seed import seed_database
 
 def create_app(test=False):
     """Flask アプリを作成するファクトリ関数"""
@@ -34,6 +33,7 @@ def create_app(test=False):
     db.init_app(app)
     with app.app_context():
         db.create_all() 
+        seed_database(app)
 
     register_blueprints(app)
     
