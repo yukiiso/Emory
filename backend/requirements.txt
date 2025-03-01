@@ -5,3 +5,4 @@ mysqlclient==2.2.7
 pymysql
 cryptography==41.0.3
 flask_cors
+boto3
