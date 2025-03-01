@@ -1,6 +1,6 @@
 from models import db, User, Session, UserResponse
 
-def seed_data():
+def seed_database():
     """初回の Seed Data を投入"""
     if User.query.first():  # すでにデータがある場合はスキップ
         print("✅ Seed Data はすでに投入済みです")
