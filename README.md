@@ -4,12 +4,12 @@ AI-powered counseling assistant with emotion visualization and conversation summ
 
 # セットアップコマンド
 ```
-docker compose --env-file ./config.env up --build -d
+docker compose --env-file config.env up --build -d
 ```
 
 立ち上げ直し時コピペ用: 
 ```
-docker compose --env-file ./config.env down --volumes
-docker compose --env-file ./config.env up --build -d
+docker compose --env-file config.env down --volumes 
+docker compose --env-file config.env up --build -d
 ```
 
