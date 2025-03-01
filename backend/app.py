@@ -1,6 +1,5 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from backend.routes import register_blueprints
 from backend.config import FLASK_ENV, FLASK_DEBUG, SQLALCHEMY_DATABASE_URI, SQLALCHEMY_DATABASE_URI_TEST
 from backend.models import db
@@ -10,7 +9,9 @@ import os
 def create_app(test=False):
     """Flask アプリを作成するファクトリ関数"""
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, resources={
+        r"/api/*": {"origins": "*"},    # Allow all origins for `/api` routes
+    })    
 
     if test:
         # ✅ テスト環境用の設定
@@ -31,19 +32,6 @@ def create_app(test=False):
 
     # DB の初期化
     db.init_app(app)
-    migrate = Migrate(app, db)
-    migrate.init_app(app, db)
-
-    with app.app_context():
-        from flask_migrate import upgrade
-
-        if not test:
-            # ✅ テスト時にはマイグレーションを適用しない
-            try:
-                db.create_all()
-                upgrade()  # 変更を適用
-            except Exception as e:
-                print(f"Migration Error: {e}")
 
     register_blueprints(app)
     
