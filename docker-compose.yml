@@ -3,7 +3,7 @@ version: "3.8"
 services:
   backend:
     build:
-      context: .  # `emory/` をコンテキストとして指定
+      context: .  # emory/ をコンテキストとして指定
       dockerfile: backend/Dockerfile
     container_name: flask_app
     env_file:
@@ -14,7 +14,7 @@ services:
       - mysql
       - mysql_test  # ✅ テスト用 MySQL に依存
     volumes:
-      - .:/emory  # ✅ ルートディレクトリを `/emory` としてマウント
+      - .:/emory  # ✅ ルートディレクトリを /emory としてマウント
     command: ["sh", "-c", "sleep 5 && python backend/run.py"]
     ports:
       - "${FLASK_PORT}:${FLASK_PORT}"
@@ -51,6 +51,21 @@ services:
     volumes:
       - mysqldata_test:/var/lib/mysql
 
+  frontend:
+    build:
+      context: ./frontend  # React アプリのルートディレクトリを指定
+    container_name: react_app
+    env_file:
+      - config.env  # config.env で環境変数を読み込む
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL}  # config.env から API URL を設定
+      - REACT_APP_PORT=${REACT_APP_PORT}        # React アプリのポートを設定
+    ports:
+      - "${REACT_APP_PORT}:${REACT_APP_PORT}"   # React アプリのポートを公開
+    volumes:
+      - ./frontend:/app  # ローカルディレクトリをコンテナ内にマウント
+    working_dir: /app
+    command: ["npm", "start"]  # React アプリを起動
 volumes:
   mysqldata:
   mysqldata_test:
