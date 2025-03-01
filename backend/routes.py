@@ -1,18 +1,23 @@
 from flask import jsonify, Blueprint
 
-from backend.api.db_test_api import db_test_bp
+from backend.api.dynamo_api import dynamo_bp
+from backend.api.sql_api import sql_bp
 from backend.utils import utils_bp
 
 # API Blueprint
 api_bp = Blueprint('api_bp', __name__)
+db_test_bp = Blueprint('db_test_bp', __name__)
 
 
 def register_blueprints(app):
     """Register all Blueprints to the Flask app."""
-    # Register API Blueprints
+    # Register Child Blueprints
+    db_test_bp.register_blueprint(dynamo_bp, url_prefix='/dynamo')  
+    db_test_bp.register_blueprint(sql_bp, url_prefix='/sql')  
+
     api_bp.register_blueprint(db_test_bp, url_prefix='/db_test')  
 
-    # Register Blueprints to the Flask app
+    # Register Parent Blueprints
     app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(utils_bp)
 
