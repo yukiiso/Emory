@@ -63,6 +63,15 @@ const SignUp = () => {
                     <label>Password:</label>
                     <input type="password" name="password" value={formData.password} onChange={handleChange} required />
                 </div>
+                <div className={styles["radio-group"]}>
+                    <p>Are you a counsellor?</p>
+                    <label for="yes">Yes
+                        <input type="radio" id="yes" name="radio" value="1" />
+                    </label>
+                    <label for="no">No
+                        <input type="radio" id="no" name="radio" value="0" />
+                    </label>
+                </div>
                 <button type="submit" className={styles.button}>Sign Up</button>
             </form>
             </div>

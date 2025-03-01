@@ -11,6 +11,8 @@ const SignIn = () => {
 		console.log("Signing in with:", { username, password });
 		// TODO: ここでAPIにリクエストを送る
   	};
+	
+	// TODO: Check if the user is consellor
 
 	return (
 		<div className={styles["page-container"]}>
