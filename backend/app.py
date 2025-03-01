@@ -32,6 +32,8 @@ def create_app(test=False):
 
     # DB の初期化
     db.init_app(app)
+    with app.app_context():
+        db.create_all() 
 
     register_blueprints(app)
     
