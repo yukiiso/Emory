@@ -7,3 +7,4 @@ pymysql
 Flask-Migrate
 cryptography==41.0.3
 flask_cors
+boto3
