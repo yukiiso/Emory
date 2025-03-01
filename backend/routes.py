@@ -6,16 +6,16 @@ from backend.utils import utils_bp
 
 # API Blueprint
 api_bp = Blueprint('api_bp', __name__)
-db_test_bp = Blueprint('db_test_bp', __name__)
+db_bp = Blueprint('db_bp', __name__)
 
 
 def register_blueprints(app):
     """Register all Blueprints to the Flask app."""
     # Register Child Blueprints
-    db_test_bp.register_blueprint(dynamo_bp, url_prefix='/dynamo')  
-    db_test_bp.register_blueprint(sql_bp, url_prefix='/sql')  
+    db_bp.register_blueprint(dynamo_bp, url_prefix='/dynamo')  
+    db_bp.register_blueprint(sql_bp, url_prefix='/sql')  
 
-    api_bp.register_blueprint(db_test_bp, url_prefix='/db_test')  
+    api_bp.register_blueprint(db_bp, url_prefix='/db')  
 
     # Register Parent Blueprints
     app.register_blueprint(api_bp, url_prefix='/api')
