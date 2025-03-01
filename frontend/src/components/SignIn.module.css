@@ -1,9 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+.page-container {
+    font-family: "Ubuntu", sans-serif;
+    background-color: white;
+    position: relative;
+    padding: 20px;
+}
+
 /* Title */
 h1 {
-    font-family: "Ubuntu", sans-serif;
     margin-top: 0.2em;
     text-align: center;
+}
+
+/* Sign in / Sign up */
+.link {
+    color: black;
+    text-decoration: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.link-signin {
+    margin-right: 80px;
 }
 
 /* Form */
@@ -13,11 +37,9 @@ h1 {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: lightgreen;
 }
 
 form {
-    font-family: "Ubuntu", sans-serif;
     background-color: white;
     padding: 2rem;
     border-radius: 8px;
