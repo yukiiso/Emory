@@ -1,8 +1,9 @@
-from app import create_app
-from config import FLASK_HOST, FLASK_PORT
+import sys
+sys.path.append("/emory/backend")  # ✅ backend をパスに追加
 
-# Flask アプリを作成
+from app import create_app
+
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(host=FLASK_HOST, port=int(FLASK_PORT))
+    app.run(host="0.0.0.0", port=5001, debug=True)

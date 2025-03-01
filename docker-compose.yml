@@ -4,19 +4,19 @@ services:
   backend:
     build:
       context: .  # `emory/` をコンテキストとして指定
-      dockerfile: backend/Dockerfile  # backend/ の Dockerfile を参照
+      dockerfile: backend/Dockerfile
     container_name: flask_app
     env_file:
       - config.env  
     environment:
-      PYTHONPATH: "/emory/"  # ✅ backend を Python モジュールとして認識
+      - PYTHONPATH=/emory/backend  # ✅ backend を Python モジュールとして認識
     depends_on:
       - mysql
     volumes:
       - .:/emory  # ✅ ルートディレクトリを `/emory` としてマウント
+    command: ["sh", "-c", "sleep 5 && python backend/run.py"]
     ports:
       - "${FLASK_PORT}:${FLASK_PORT}"
-    command: ["sh", "-c", "sleep 5 && python backend/run.py"]
 
   mysql:
     image: mysql:8.0
@@ -25,12 +25,12 @@ services:
     env_file:
       - ./config.env
     environment:
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_DATABASE: "${DB_NAME}"
-      MYSQL_USER: "${DB_USER}"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD_development}"
+      MYSQL_DATABASE: "${DB_NAME_development}"
+      MYSQL_USER: "${DB_USER_development}"
+      MYSQL_PASSWORD: "${DB_PASSWORD_development}"
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "${DB_PORT_development}:${DB_PORT_development}"
     volumes:
       - mysqldata:/var/lib/mysql
 

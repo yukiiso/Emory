@@ -19,18 +19,11 @@ FLASK_HOST = os.getenv("FLASK_HOST")
 FLASK_PORT = os.getenv(f"FLASK_PORT_{ENV}")
 
 # MySQL の設定
-if IS_TESTING:
-    DB_HOST = os.getenv("DB_HOST_test")  # `mysql_test` サービスを参照
-    DB_USER = os.getenv("DB_USER_test")
-    DB_PASSWORD = os.getenv("DB_PASSWORD_test")
-    DB_PORT = os.getenv("DB_PORT_test")
-    DB_NAME = os.getenv("DB_NAME_test")
-else:
-    DB_HOST = os.getenv(f"DB_HOST_{ENV}")
-    DB_USER = os.getenv(f"DB_USER_{ENV}")
-    DB_PASSWORD = os.getenv(f"DB_PASSWORD_{ENV}")
-    DB_PORT = os.getenv(f"DB_PORT_{ENV}")
-    DB_NAME = os.getenv(f"DB_NAME_{ENV}")
+DB_HOST = os.getenv(f"DB_HOST_{ENV}")
+DB_USER = os.getenv(f"DB_USER_{ENV}")
+DB_PASSWORD = os.getenv(f"DB_PASSWORD_{ENV}")
+DB_PORT = os.getenv(f"DB_PORT_{ENV}")
+DB_NAME = os.getenv(f"DB_NAME_{ENV}")
 
 SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
