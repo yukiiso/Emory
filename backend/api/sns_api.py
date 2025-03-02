@@ -8,6 +8,7 @@ from backend.config import AWSClient, SNS_NOTIFICATION_ENDPOINT, SNS_TOPICS
 sns_bp = Blueprint('sns_bp', __name__)
 rekognition_client = AWSClient.init_rekognition_client()
 sns_client = AWSClient.init_sns_client()
+transcribe_client = AWSClient.init_transcribe_client()  # Transcribe クライアントを追加
 
 def subscribe_to_sns_topics():
     """
@@ -41,61 +42,71 @@ def subscribe_to_sns_topics():
         print(f"SNS サブスクリプションの登録中にエラーが発生しました: {str(e)}")
 
 
-@sns_bp.route('/notification', methods=['POST'])
+import json
+import requests
+from flask import Blueprint, request, jsonify
+
+sns_bp = Blueprint("sns_bp", __name__)
+
+@sns_bp.route("/notification", methods=["POST"])
 def sns_notification():
     try:
-        content_type = request.headers.get('Content-Type', '').lower()
-        print(f"Content-Type: {content_type}")
+        print("Received SNS Notification")
 
-        if content_type != 'application/json':
-            print("Warning: Content-Type is not application/json, trying to parse manually")
-            message = json.loads(request.data.decode('utf-8'))
-        else:
-            message = request.get_json()
+        # SNS のリクエストを手動でパースする
+        try:
+            raw_data = request.data.decode("utf-8")
+            print(f"Raw Request Data: {raw_data}")
 
-        if not message:
-            print("Error: Received empty request or invalid JSON")
-            return jsonify({'error': 'Invalid request'}), 400
+            message = json.loads(raw_data)  # ここで JSON に変換
+        except json.JSONDecodeError:
+            print("Error: Failed to parse SNS Notification as JSON")
+            return jsonify({"error": "Invalid JSON format"}), 400
 
-        print("Received SNS Notification:")
+        print("Parsed SNS Message:")
         print(json.dumps(message, indent=4))
 
-        # SNS の SubscriptionConfirmation に対応
+        if not message:
+            return jsonify({"error": "Invalid request"}), 400
+
+        # SNS Subscription Confirmation
         if "Type" in message and message["Type"] == "SubscriptionConfirmation":
             subscribe_url = message.get("SubscribeURL")
             if subscribe_url:
                 print(f"Confirming subscription: {subscribe_url}")
                 requests.get(subscribe_url)
-                return jsonify({'message': 'Subscription confirmed'}), 200
+                return jsonify({"message": "Subscription confirmed"}), 200
 
-        topic_arn = message.get('TopicArn')
-
-        # SNS の `Message` が JSON 文字列の場合、デコードする
+        # SNS の `Message` が JSON 文字列の場合、さらにデコード
         try:
             message_data = json.loads(message["Message"])
+            print("Decoded SNS Message:")
+            print(json.dumps(message_data, indent=4))
         except (json.JSONDecodeError, TypeError):
-            print("Error: Failed to decode SNS Message")
-            return jsonify({'error': 'Invalid SNS Message format'}), 400
+            print("Error: Failed to decode SNS Message content")
+            return jsonify({"error": "Invalid SNS Message format"}), 400
 
-        # 解析開始通知の処理
-        if topic_arn == os.getenv("SNS_TOPIC_VIDEO_ANALYSIS_START"):
-            job_id = message_data.get('JobId')
-            print(f"Processing Video Analysis Started with JobId: {job_id}")
-            return jsonify({'message': f"Video analysis started for JobId {job_id}"}), 200
+        job_name = message_data.get("TranscriptionJobName")
+        job_status = message_data.get("TranscriptionJobStatus")
 
-        # 解析完了通知の処理
-        if topic_arn == os.getenv("SNS_TOPIC_VIDEO_ANALYSIS_COMPLETED"):
-            job_id = message_data.get('JobId')
-            print(f"Processing Video Analysis Completed with JobId: {job_id}")
-            result = rekognition_client.get_face_detection(JobId=job_id)
-            return jsonify({'rekognition_result': result}), 200
+        if not job_name or not job_status:
+            print("Error: Missing required fields in SNS Message")
+            return jsonify({"error": "Invalid SNS Message content"}), 400
 
-        print("Error: Unknown SNS Topic")
-        return jsonify({'error': 'Unknown SNS Topic'}), 400
+        print(f"Transcription Job {job_name} Status: {job_status}")
+
+        if job_status == "COMPLETED":
+            transcript_uri = message_data.get("TranscriptFileUri")
+            print(f"Transcription Completed: {transcript_uri}")
+            return jsonify({"status": "COMPLETED", "transcript_uri": transcript_uri}), 200
+        elif job_status == "FAILED":
+            return jsonify({"status": "FAILED"}), 500
+
+        return jsonify({"message": "Notification received"}), 200
 
     except Exception as e:
         print(f"Unexpected error: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
 
 # Flask アプリ起動時に SNS トピックへ自動登録
