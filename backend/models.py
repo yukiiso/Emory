@@ -14,9 +14,7 @@ class User(db.Model):
     password        = db.Column(db.String(255), nullable=False)
     category        = db.Column(db.Enum('0', '1'), nullable=False)
     
-    records         = db.relationship('Record', backref='user_record', lazy=True)
-    face_analyses   = db.relationship('FaceAnalysis', backref='user_face', lazy=True)
-    voice_analyses  = db.relationship('VoiceAnalysis', backref='user_voice', lazy=True)
+    records         = db.relationship("Record", back_populates="user")  # Corrected relationship
 
 
 class Question(db.Model):
@@ -30,22 +28,22 @@ class Record(db.Model):
     __tablename__ = 'record'
     
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # use user_id instead of username
     v_name          = db.Column(db.String(255))  # Video name "username_qid_v"
     a_name          = db.Column(db.String(255))  # Audio name "username_qid_a"
     date            = db.Column(db.DateTime, default=db.func.current_timestamp())
     summary         = db.Column(db.Text, nullable=False)  # Store the summary
 
-    user            = db.relationship('User', backref='record_user', lazy=True)
+    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)    
     qid             = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)  # Foreign key to question
-    question        = db.relationship('Question', backref='record_qid', lazy=True)  # relationship to Question
+    
+    user            = db.relationship("User", back_populates="records")
+    question        = db.relationship("Question", backref="records")  # Establishing proper relationship
+
 
 class FaceAnalysis(db.Model):
     __tablename__ = 'face_analysis'
     
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # use user_id instead of username
-    question_id     = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     happy           = db.Column(db.Float, default=0.0)
     sad             = db.Column(db.Float, default=0.0)
     angry           = db.Column(db.Float, default=0.0)
@@ -53,14 +51,18 @@ class FaceAnalysis(db.Model):
     fear            = db.Column(db.Float, default=0.0)
     smile           = db.Column(db.Float, default=0.0)
     
-    user            = db.relationship('User', backref='face_analysis', lazy=True)
-    question        = db.relationship('Question', backref='face_analysis_question', lazy=True)
+    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    question_id     = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+    
+    user            = db.relationship("User", backref="face_analyses")
+    question        = db.relationship("Question", backref="face_analyses")
+
 
 class VoiceAnalysis(db.Model):
     __tablename__ = 'voice_analysis'
     
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # use user_id instead of username
+    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  
     question_id     = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     transcript      = db.Column(db.String(255), nullable=False)
     mixed           = db.Column(db.Float, default=0.0)
@@ -68,5 +70,5 @@ class VoiceAnalysis(db.Model):
     neutral         = db.Column(db.Float, default=0.0)
     positive        = db.Column(db.Float, default=0.0)
     
-    user            = db.relationship('User', backref='voice_analysis', lazy=True)
-    question        = db.relationship('Question', backref='voice_analysis', lazy=True)
+    user            = db.relationship("User", backref="voice_analyses")
+    question        = db.relationship("Question", backref="voice_analyses")
