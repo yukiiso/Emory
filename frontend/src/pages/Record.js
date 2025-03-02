@@ -80,7 +80,7 @@ const VideoRecorder = () => {
 		// TODO: StorageにSave機能追加
 
 
-		navigate(`/dash?user=${user.username}`);
+		navigate(`/dash?user=${user[0].username}`);
 	};
 
 	return (
