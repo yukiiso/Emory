@@ -5,3 +5,7 @@
     width: calc(100% - 100px);
     overflow-x: hidden;
 }
+
+.title {
+    margin: 1em 0 1em 2em;
+}

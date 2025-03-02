@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../components/Dashboard.module.css";
 import { Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale, ArcElement } from "chart.js";
 
@@ -32,18 +33,20 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-around", padding: "20px" }}>
-      {/* 折れ線グラフ */}
-      <div style={{ width: "45%" }}>
-        <h2>Sales Trend</h2>
-        <Line data={lineData} />
-      </div>
-
-      {/* 円グラフ */}
-      <div style={{ width: "45%" }}>
-        <h2>Product Share</h2>
-        <Pie data={pieData} />
-      </div>
+    <div className={styles["page-container"]}>
+        <h1 className={styles.title}>Dashboard</h1>
+        <div style={{ display: "flex", justifyContent: "space-around", padding: "20px" }}>
+        {/* 折れ線グラフ */}
+        <div style={{ width: "45%" }}>
+            <h2>Sales Trend</h2>
+            <Line data={lineData} />
+        </div>
+        {/* 円グラフ */}
+        <div style={{ width: "45%" }}>
+            <h2>Product Share</h2>
+            <Pie data={pieData} />
+        </div>
+        </div>
     </div>
   );
 };
