@@ -4,7 +4,7 @@ import Card from "../components/Card";
 
 const Talk = () => {
     // TO DO: Check if user is signed in
-
+    
     return (
         <div className={styles["page-container"]}>
             <h1 className={styles.title}>Choose the question and tell me about youself!</h1>

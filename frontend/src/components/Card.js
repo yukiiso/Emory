@@ -4,7 +4,7 @@ import styles from "./Card.module.css";
 
 const Card = ({ title, description }) => {
     return (
-        <Link to="/sign-in" className={styles.card}>
+        <Link to="/record" className={styles.card}>
             <div>
                 <h2 className={styles.cardTitle}>{title}</h2>
                 <p className={styles.cardDescription}>{description}</p>

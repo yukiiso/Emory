@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css";
 
 const Navbar = () => {
     return (
-		<nav>
-			<Link to="/">Home</Link> | 
-			<Link to="/about">About</Link> | 
-			<Link to="/sample-api-data">API Data</Link>
-		</nav>
+		<div className={styles.navbar}>
+			<Link to="/talk" className={styles.navButton}>Talk</Link>
+			<Link to="/dash" className={styles.navButton}>Dash</Link>
+		</div>
     );
 };
 
