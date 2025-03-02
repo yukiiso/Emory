@@ -1,11 +1,15 @@
 from flask import Flask, request, jsonify, Blueprint
 from werkzeug.security import generate_password_hash
 from backend.models import db
+from flask_cors import CORS
 from models import User
 
 signup_bp = Blueprint('signup_bp', __name__)
 
 app = Flask(__name__)
+CORS(app, resources={
+        r"/api/*": {"origins": "*"},    # Allow all origins for `/api` routes
+    })   
 
 @signup_bp.route('/test', methods=['GET'])
 def test_signup_route():

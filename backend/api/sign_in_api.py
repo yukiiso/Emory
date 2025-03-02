@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify
 from werkzeug.security import check_password_hash
-from app import db
+from backend.models import db
+from flask_cors import CORS
 from models import User
 
 app = Flask(__name__)
+CORS(app, resources={
+        r"/api/*": {"origins": "*"},    # Allow all origins for `/api` routes
+    })   
 
 @app.route('/signin', methods=['POST'])
 def signin():
