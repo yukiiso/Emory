@@ -1,6 +1,6 @@
 # Inside /emory/backend/routes.py
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, render_template
 from backend.api.dynamo_api import dynamo_bp
 from backend.api.sql_api import sql_bp
 from backend.upload import upload_video_bp, upload_audio_bp
@@ -10,6 +10,8 @@ from backend.utils import utils_bp
 api_bp = Blueprint('api_bp', __name__)
 db_bp = Blueprint('db_bp', __name__)
 media_bp = Blueprint('media_bp', __name__)
+upload_test_bp = Blueprint('upload_test_bp', __name__)
+
 
 def register_blueprints(app):
     """Register all Blueprints to the Flask app."""
@@ -26,6 +28,13 @@ def register_blueprints(app):
     app.register_blueprint(media_bp, url_prefix='/media')
     app.register_blueprint(utils_bp)
 
+    app.register_blueprint(upload_test_bp, url_prefix='/upload_test')
+
 @api_bp.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"message": "Flask backend API is running!"})
+
+@upload_test_bp.route('/')
+def upload_form():
+    # Render the HTML page for uploading files
+    return render_template('upload_form.html')

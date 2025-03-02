@@ -5,6 +5,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import SampleApiData from "../pages/SampleApiData";
 import NotFound from "../pages/NotFound";
+import Upload from "../pages/Upload";
 
 const AppRoutes = () => {
   return (
@@ -15,7 +16,8 @@ const AppRoutes = () => {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/sample-api-data" element={<SampleApiData />} />
       <Route path="*" element={<NotFound />} />
-    </Routes>
+      <Route path="/upload" element={<Upload />} />
+      </Routes>
   );
 };
 

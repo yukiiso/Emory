@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sacred-footing-452403-a0",
+  "private_key_id": "0a9fad3d4db69ad2a67cb8714635708fe5a792a1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCb6CIgqp6kE3f7\n29P6Zby/P+rVSNV5JTW0tXB4dTBOIBVRh9vMB0tsDGdmjwJEzFeUxiQ04xfKqspj\nlIsKwwUPGqpEqItG9e60CIxlWyjHRztb5rok3gpKm1cBRndtTzzKGuTK+z4NKkyY\naHWw7KmjRz/KRQgEeeWqgYSnqfTK2MqkZTiBktB3ypFSnRARZdm4pTSaBwUi2cPU\nT6FWFU7YP25WdnUdGIPoK8M5FEfmSt/PLIaDxJpOdNIhw+Zhuxg9l/3y5o7CbsC1\nCJCI2/1N8HNNnSu199OKDqycJjmhAcFe0GtgVaTi9QLDeO7silIJY7+4GvH01uma\nBLycp2dvAgMBAAECgf8QUjzZ+2kGkQMxwQTWZQNdaIbGmgyL1VljkZsBZ6mm6oG3\nOoHIDWHX7drlSBNbIG+kVrNzorja5QZLAA7BeA9167saqCPsfQWzbMtF0RINZDRs\nN1Te7ZLzCVASa7R7Vp0Gi2POqOUJSJeI9pnB69FwEziaWp+vceAyxikc/eEI9LJZ\npUVhb4XV9Zp15iQnDUKP491X3B9/ojTsDOntlEeXmN0IIfSvyMn1QxfSNkkC1Z62\ntO3uAb0wo8+hGy6OWWDpFn+MJY+ixcAg1/SlBDj9VxtDodM5NfxdUYIRFxlPNqHQ\ndbhlUNB0bk51FNA7LFKEgCdbx4GmUsat6z7mMUECgYEA1HMbTdA6gLU5ysH/IrAs\niKcV1P+4XnK4VH6IkmxcBnRqLhYqRpTWslwnMhwdDgdsNy+XbixrFlGvafPiCw8l\nX/9HGMZjspmduOjY7YM6o/NFFnAfMMk1t+sbqQxrqAQLHbWZZOkrt+hTXFLrrN33\nJHhu3OhoWfX8lC7TcQYqAj8CgYEAu93HzckpeRuST+1ATGjusHVhRInVqP7feU+A\nB3oHiZ5Sz0I+7WSHyIuH5knQAFYVw91qp0bD2BPl3+BYMpvXTLBO5r8vrJCdlDVR\nORrpTdVK7Bs2cNdmUVkti1hXjcum9YuuGQnssgl7z6BuA9k2Aqt72LHFE+W7hSdr\nUw577tECgYBbGCQcAG4lZA+svfQtJodh7Orykte2P9CEAmGDD02CQwaITl7ANu+8\nOMFhviZDLrGbFCAFUKx2PH5PmxBQl6T5/Za5q89x9GZptAXYCc3qINR944OsQopz\nGy+YE8hRmbI+gfCNEWH6kHa1/qQpUl+3VqCKvmiIMm6kB1QIgZEftwKBgQCaM4tK\nBUDucEwjIMkzLrokyuQg3sYqZbHGoBOlj2tacULlbim6r1aorKbKxnFdpUtOLpLZ\nZMNhu8tmfH3IZJRPFTReQDWAfl9phG374nP3eAh8TkXcT2FjikBQ7R1IfQ245ILt\neHD5HcGrhbJnpEWp4VnRXvE1yM6nl9iHHw9o0QKBgQCbZ5pLVdcgpm4x5DW2/Z/S\n3FsdDOXK3TCAeiLPVSItRhGQqR/vh5UkAHFTpPtGzCAFXoCT+SIGWuRVqgX521vB\neXvsJ3r/dgmMT6w1frsF4lSX3kVs2HCq/hQiHVuJqOMQMQGJ4EF1lfL4O98zJR9K\nvysD6OOXSxA7dGHrlzMxZg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "emory-225@sacred-footing-452403-a0.iam.gserviceaccount.com",
+  "client_id": "104138823494484658290",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/emory-225%40sacred-footing-452403-a0.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

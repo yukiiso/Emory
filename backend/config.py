@@ -32,3 +32,5 @@ SQLALCHEMY_DATABASE_URI_TEST = f"mysql+pymysql://{DB_USER_TEST}:{DB_PASSWORD_TES
 # DynamoDB の設定
 DYNAMODB_ENDPOINT = os.getenv(f"DYNAMODB_ENDPOINT_{ENV}") 
 AWS_REGION = os.getenv("AWS_REGION")  
+
+google_credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
