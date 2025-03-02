@@ -5,6 +5,7 @@ from backend.api.sql_api import sql_bp
 from backend.api.chatgpt_api import chatgpt_bp
 from backend.api.s3_api import s3_bp
 from backend.api.rekognition_api import rekognition_bp
+from backend.api.sns_api import sns_bp
 from backend.utils import utils_bp
 
 # API Blueprint
@@ -18,6 +19,7 @@ def register_blueprints(app):
     db_bp.register_blueprint(dynamo_bp, url_prefix='/dynamo')  
     db_bp.register_blueprint(sql_bp, url_prefix='/sql')
     
+    api_bp.register_blueprint(sns_bp, url_prefix='sns')
     api_bp.register_blueprint(rekognition_bp, url_prefix='rekognition')
     api_bp.register_blueprint(s3_bp, url_prefix='/s3')
     api_bp.register_blueprint(chatgpt_bp, url_prefix='/chatgpt')
