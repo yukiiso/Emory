@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styles from "../components/Record.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const VideoRecorder = () => {
 	const [recording, setRecording] = useState(false);
@@ -11,6 +11,11 @@ const VideoRecorder = () => {
 	const recordedChunks = useRef([]);
 	const streamRef = useRef(null);
 	const location = useLocation();
+
+	// Assume current user
+	const user = [
+        { id: 1, username: "john_doe", name: "John Doe" },
+    ];
 
 	// Talk.jsから送られてきた質問
     const question = location.state?.question;
@@ -68,10 +73,14 @@ const VideoRecorder = () => {
 		}
 		setCameraActive(false);
 	};
-
+	
+	const navigate = useNavigate();
 	// ⬇️ 動画をダウンロード
 	const sendVideo = () => {
 		// TODO: StorageにSave機能追加
+
+
+		navigate(`/dash?user=${user[0].username}`);
 	};
 
 	return (
@@ -85,7 +94,7 @@ const VideoRecorder = () => {
 			) : !recording ? (
 				<button className={styles.buttonDesign} onClick={startRecording}>Start Recording</button>
 			) : (
-				<button className={styles.buttonDesign} onClick={stopRecording}>Stop Recording</button>
+				<button className={styles.buttonDesignRed} onClick={stopRecording}>Stop Recording</button>
 			)}
 			</div>
 			{videoURL && (

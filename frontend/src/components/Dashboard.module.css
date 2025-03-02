@@ -8,8 +8,26 @@
     overflow-x: hidden;
 }
 
+.userinfo {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .title {
-    margin: 1em 0 1em 2em;
+    margin: 1em 0em 1em 2em;
+    width: 100%;
+    flex: 6;
+}
+
+.info {
+    width: 100%;
+    flex: 4;
+}
+
+.title2 {
+    margin: 1em 2em 1em 2em;
+    width: 100%;
 }
 
 .graphs-container {
@@ -43,4 +61,14 @@ textarea {
     box-sizing: border-box;
     resize: vertical;
     overflow-y: auto;
+}
+
+.arrow {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2em 0 2em;
+}
+
+.prev, .next {
+    width: 80px;
 }
