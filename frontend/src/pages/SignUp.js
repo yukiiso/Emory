@@ -32,7 +32,7 @@ const SignUp = () => {
                 <Link to="/sign-in" className={`${styles["link-signin"]} ${styles.link}`}>Sign In</Link>
                 <Link to="/sign-up" className={styles.link}>Sign Up</Link>
             </div>
-            <div className={styles["form-container"]}>
+            <div className={styles["form-container-up"]}>
             <form onSubmit={handleSubmit}>
             <h1 className={styles.title}>Create an Account</h1>
                 <div>

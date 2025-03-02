@@ -43,6 +43,15 @@
     height: 100vh;
 }
 
+.form-container-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 5em 0 5em 0;
+}
+
 form {
     background-color: white;
     padding: 2rem;
