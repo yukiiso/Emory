@@ -16,3 +16,28 @@ node_modules
 
 # Config file
 config.env
+
+# Python Virtual Environment
+backend/venv/
+
+# Certificates (SSL Keys)
+frontend/certs/
+
+# Node.js dependencies (不要なら追加)
+frontend/node_modules/
+
+# Build files
+frontend/build/
+
+
+# Unwanted frontend files
+frontend/=
+frontend/CACHED
+frontend/ERROR
+frontend/exporting
+frontend/frontend@0.1.0
+frontend/naming
+frontend/react-scripts
+frontend/writing
+frontend/\[backend\]
+frontend/\[frontend
