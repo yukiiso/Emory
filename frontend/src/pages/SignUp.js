@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { REACT_APP_API_URL } from "../config"; // Importing the API_URL from config
 import styles from "../components/SignIn.module.css";
 import { Link } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ const SignUp = () => {
         e.preventDefault();
         console.log("Signing up with:", formData);
         try {
-            const response = await fetch('http://localhost:5001/api/signup', {
+            const response = await fetch(`${REACT_APP_API_URL}/api/signup`, { // Using API_URL from config
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +54,6 @@ const SignUp = () => {
             alert(`Signup failed: ${error.message}`);
         }
     };
-    
 
     return (
         <div className={styles["page-container"]}>
