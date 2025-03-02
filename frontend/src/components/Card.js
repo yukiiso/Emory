@@ -1,15 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 
-const Card = ({ title, description }) => {
+const Card = ({ title, description, onClick }) => {
     return (
-        <Link to="/record" className={styles.card}>
+        <div className={styles.card} onClick={() => onClick(description)}>
             <div>
                 <h2 className={styles.cardTitle}>{title}</h2>
                 <p className={styles.cardDescription}>{description}</p>
             </div>
-        </Link>
+        </div>
     );
 };
 

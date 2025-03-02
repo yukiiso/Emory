@@ -49,6 +49,7 @@ form {
 
 /* Input fields */
 input {
+    font-family: "Ubuntu", sans-serif;
     width: 100%;
     padding: 0.8rem;
     margin: 0.8rem 0;
