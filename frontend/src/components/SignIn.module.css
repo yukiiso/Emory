@@ -2,9 +2,13 @@
 
 .page-container {
     font-family: "Ubuntu", sans-serif;
-    background-color: white;
+    /* background-color: white; */
+    background-image: url("../../public/backgroud.jpg");
     position: relative;
     padding: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Title */
