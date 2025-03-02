@@ -43,6 +43,7 @@ def signup():
     try:
         db.session.add(new_user)
         db.session.commit()
+        # Routing!!!! TO DO
         return jsonify({"message": "User created successfully!"}), 201
     except Exception as e:
         db.session.rollback()

@@ -29,6 +29,7 @@ def register_blueprints(app):
     # Register Parent Blueprints
     app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(api_bp, url_prefix='/signup')
+    app.register_blueprint(api_bp, url_prefix='/signin')
     app.register_blueprint(utils_bp)
 
 @api_bp.route('/health', methods=['GET'])
