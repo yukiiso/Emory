@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../components/Dashboard.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { Line, Pie } from "react-chartjs-2";
+import { Line, Pie, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale, ArcElement } from "chart.js";
 
 // Chart.js のコンポーネントを登録
@@ -18,26 +18,68 @@ const Dashboard = () => {
 
 	// 折れ線グラフのデータ
 	const lineData = {
-		labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+		labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00"], // 時間
 		datasets: [
-		{
-			label: "Sales",
-			data: [10, 30, 50, 40, 70, 100],
-			borderColor: "blue",
-			backgroundColor: "rgba(0, 0, 255, 0.2)",
-			tension: 0.4,
-		},
+			{
+				label: "Happy",
+				data: [80, 85, 78, 90, 75, 88], // 各時間の度合い (0-100%)
+				borderColor: "yellow",
+				backgroundColor: "rgba(255, 255, 0, 0.2)",
+				tension: 0.4,
+			},
+			{
+				label: "Sad",
+				data: [20, 30, 40, 35, 25, 15],
+				borderColor: "blue",
+				backgroundColor: "rgba(0, 0, 255, 0.2)",
+				tension: 0.4,
+			},
+			{
+				label: "Angry",
+				data: [10, 15, 20, 25, 30, 20],
+				borderColor: "red",
+				backgroundColor: "rgba(255, 0, 0, 0.2)",
+				tension: 0.4,
+			},
+			{
+				label: "Calm",
+				data: [70, 65, 80, 75, 85, 90],
+				borderColor: "green",
+				backgroundColor: "rgba(0, 255, 0, 0.2)",
+				tension: 0.4,
+			},
+			{
+				label: "Fear",
+				data: [5, 10, 15, 20, 25, 30],
+				borderColor: "purple",
+				backgroundColor: "rgba(128, 0, 128, 0.2)",
+				tension: 0.4,
+			},
+		],
+	};
+	
+	// 円グラフのデータ
+	const pieData = {
+		labels: ["Smiling", "Not Smiling"],
+		datasets: [
+			{
+				data: [72, 28],
+				backgroundColor: ["orange", "lightgray"],
+			},
 		],
 	};
 
-	// 円グラフのデータ
-	const pieData = {
-		labels: ["Apple", "Banana", "Cherry"],
+	// 棒グラフのデータ
+	const barData = {
+		labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00"], // 時間軸
 		datasets: [
-		{
-			data: [40, 30, 30],
-			backgroundColor: ["red", "yellow", "pink"],
-		},
+			{
+				label: "Speaking Speed (WPM)",
+				data: [120, 150, 130, 140, 110, 160], // 話すスピード（例: 単語/分）
+				backgroundColor: "rgba(54, 162, 235, 0.6)", // 青色
+				borderColor: "blue",
+				borderWidth: 1,
+			},
 		],
 	};
 
@@ -55,14 +97,31 @@ const Dashboard = () => {
 			<div className={styles["graphs-container"]}>
 				{/* 折れ線グラフ */}
 				<div className={styles["line-graph"]}>
-					<h2>Sales Trend</h2>
-					<Line data={lineData} />
+					<h2>Emotion Trend</h2>
+					<Line data={lineData} options={{ responsive: true, scales: { y: { min: 0, max: 100 } } }} />
 				</div>
 				{/* 円グラフ */}
 				<div className={styles["pie-graph"]}>
-					<h2>Product Share</h2>
+					<h2>Smile Probability</h2>
 					<Pie data={pieData} />
 				</div>
+				{/* 棒グラフ */}
+				{/* <div className={styles["bar-chart"]}>
+					<h2>Speaking Speed Over Time</h2>
+					<Bar
+						data={barData}
+						options={{
+							responsive: true,
+							scales: {
+								y: { min: 0, max: 200, title: { display: true, text: "Words Per Minute (WPM)" } }, // y軸: スピード
+								x: { title: { display: true, text: "Time" } }, // x軸: 時間
+							},
+							plugins: {
+								legend: { display: false }, // ラベル非表示
+							},
+						}}
+					/>
+				</div> */}
 			</div>
 			{/* Counsellorじゃなかったら表示する */}
 			<div className={styles.summary}>
