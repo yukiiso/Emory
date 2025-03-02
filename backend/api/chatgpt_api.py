@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from config import OPENAI_API_KEY
 import requests
-from app import db
+from backend.models import db
 from models import Record
 import re
 

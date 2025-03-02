@@ -18,33 +18,33 @@ class User(db.Model):
     face_analyses   = db.relationship('FaceAnalysis', backref='user_face', lazy=True)
     voice_analyses  = db.relationship('VoiceAnalysis', backref='user_voice', lazy=True)
 
+
 class Question(db.Model):
     __tablename__   = 'question'
 
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
     content         = db.Column(db.Text, nullable=False)
-    
-    face_analyses   = db.relationship('FaceAnalysis', backref='question_analysis', lazy=True)
-    voice_analyses  = db.relationship('VoiceAnalysis', backref='question_voice', lazy=True)
+
 
 class Record(db.Model):
     __tablename__ = 'record'
     
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username        = db.Column(db.String(255), db.ForeignKey('user.username'), nullable=False)
+    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # use user_id instead of username
     v_name          = db.Column(db.String(255))  # Video name "username_qid_v"
     a_name          = db.Column(db.String(255))  # Audio name "username_qid_a"
     date            = db.Column(db.DateTime, default=db.func.current_timestamp())
     summary         = db.Column(db.Text, nullable=False)  # Store the summary
 
     user            = db.relationship('User', backref='record_user', lazy=True)
-    qid             = db.relationship('Question', backref='record_qid', lazy=True)
+    qid             = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)  # Foreign key to question
+    question        = db.relationship('Question', backref='record_qid', lazy=True)  # relationship to Question
 
 class FaceAnalysis(db.Model):
     __tablename__ = 'face_analysis'
     
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username        = db.Column(db.String(255), db.ForeignKey('user.username'), nullable=False)
+    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # use user_id instead of username
     question_id     = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     happy           = db.Column(db.Float, default=0.0)
     sad             = db.Column(db.Float, default=0.0)
@@ -60,7 +60,7 @@ class VoiceAnalysis(db.Model):
     __tablename__ = 'voice_analysis'
     
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username        = db.Column(db.String(255), db.ForeignKey('user.username'), nullable=False)
+    user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # use user_id instead of username
     question_id     = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     speed           = db.Column(db.Float, default=0.0)
     pulse           = db.Column(db.Float, default=0.0)
