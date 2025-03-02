@@ -12,6 +12,7 @@ class User(db.Model):
     username        = db.Column(db.String(255), unique=True, nullable=False)
     email           = db.Column(db.String(255), unique=True, nullable=False)
     password        = db.Column(db.String(255), nullable=False)
+    category        = db.Column(db.Enum('0', '1'), nullable=False)
     
     records         = db.relationship('Record', backref='user_record', lazy=True)
     face_analyses   = db.relationship('FaceAnalysis', backref='user_face', lazy=True)
@@ -34,8 +35,10 @@ class Record(db.Model):
     v_name          = db.Column(db.String(255))  # Video name "username_qid_v"
     a_name          = db.Column(db.String(255))  # Audio name "username_qid_a"
     date            = db.Column(db.DateTime, default=db.func.current_timestamp())
-    
+    summary         = db.Column(db.Text, nullable=False)  # Store the summary
+
     user            = db.relationship('User', backref='record_user', lazy=True)
+    qid             = db.relationship('Question', backref='record_qid', lazy=True)
 
 class FaceAnalysis(db.Model):
     __tablename__ = 'face_analysis'
