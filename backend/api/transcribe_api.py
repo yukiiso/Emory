@@ -76,3 +76,4 @@ def start_transcription():
     except Exception as e:
         print(f"Error during transcription process: {str(e)}")  # エラーログ
         return jsonify({"error": str(e)}), 500
+
