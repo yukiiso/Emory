@@ -40,6 +40,15 @@ video {
     border-radius: 10px;
 }
 
+.videoSection h1 {
+    text-align: center;
+}
+
+.saveBt {
+    display: flex;
+    justify-content: center;
+}
+
 .instructionSection {
     padding: 60px;
 }
