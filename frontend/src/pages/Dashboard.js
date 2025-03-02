@@ -35,17 +35,24 @@ const Dashboard = () => {
   return (
     <div className={styles["page-container"]}>
         <h1 className={styles.title}>Dashboard</h1>
-        <div style={{ display: "flex", justifyContent: "space-around", padding: "20px" }}>
-        {/* 折れ線グラフ */}
-        <div style={{ width: "45%" }}>
-            <h2>Sales Trend</h2>
-            <Line data={lineData} />
+        <div className={styles["graphs-container"]}>
+            {/* 折れ線グラフ */}
+            <div className={styles["line-graph"]}>
+                <h2>Sales Trend</h2>
+                <Line data={lineData} />
+            </div>
+            {/* 円グラフ */}
+            <div className={styles["pie-graph"]}>
+                <h2>Product Share</h2>
+                <Pie data={pieData} />
+            </div>
         </div>
-        {/* 円グラフ */}
-        <div style={{ width: "45%" }}>
-            <h2>Product Share</h2>
-            <Pie data={pieData} />
-        </div>
+        {/* Counsellorじゃなかったら表示する */}
+        <div className={styles.summary}>
+            <h2>Summary</h2>
+            <textarea id="summary" name="summary">
+            At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+            </textarea>
         </div>
     </div>
   );

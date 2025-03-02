@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
 .page-container {
     font-family: "Ubuntu", sans-serif;
     padding: 20px 0 20px 0;
@@ -8,4 +10,37 @@
 
 .title {
     margin: 1em 0 1em 2em;
+}
+
+.graphs-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 30px;
+}
+
+.line-graph {
+    width: 60%;
+}
+
+.pie-graph {
+    width: 40%;
+}
+
+.summary {
+    margin: 2em;
+}
+
+textarea {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 13pt;
+    width: 100%;
+    min-height: 200px;
+    max-width: 100%;
+    padding: 10px;
+    border: 3px solid #043f2d;
+    border-radius: 8px;
+    box-sizing: border-box;
+    resize: vertical;
+    overflow-y: auto;
 }
