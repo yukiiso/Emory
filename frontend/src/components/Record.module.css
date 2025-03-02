@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+.page-container {
+    font-family: "Ubuntu", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 0 20px 0;
+    margin-left: 100px;
+    width: calc(100% - 100px);
+    overflow-x: hidden;
+}
+
+.buttonDesign {
+    width: 300px;
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.buttonDesign:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.videoSection {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+video {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+.instructionSection {
+    padding: 60px;
+}
+
+.instructions {
+    flex: 2;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.instructions h2 {
+    text-align: center;
+}
+
+.instructions ol {
+    padding-left: 20px;
+}
