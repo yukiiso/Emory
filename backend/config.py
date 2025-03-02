@@ -43,6 +43,12 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_REGION = os.getenv("AWS_REGION")  
 S3_BUCKET = os.getenv("S3_BUCKET")
 
+SNS_NOTIFICATION_ENDPOINT = os.getenv("SNS_NOTIFICATION_ENDPOINT")
+SNS_TOPICS = [
+            os.getenv("SNS_TOPIC_VIDEO_ANALYSIS_START"),
+            os.getenv("SNS_TOPIC_VIDEO_ANALYSIS_COMPLETED")
+        ]
+
 class AWSClient:
     @staticmethod
     def init_s3_client():
@@ -57,6 +63,34 @@ class AWSClient:
     def init_rekognition_client():
         return boto3.client(
             "rekognition",
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            region_name=AWS_REGION
+        )
+    
+    @staticmethod
+    def init_sns_client():
+        return boto3.client(
+            "sns",
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            region_name=AWS_REGION
+        )
+    
+    
+    @staticmethod
+    def init_transcribe_client():
+        return boto3.client(
+            "transcribe",
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            region_name=AWS_REGION
+        )
+    
+    @staticmethod
+    def init_comprehend_client():
+        return boto3.client(
+            "comprehend",
             aws_access_key_id=AWS_ACCESS_KEY_ID,
             aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
             region_name=AWS_REGION
