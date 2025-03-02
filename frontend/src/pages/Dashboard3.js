@@ -24,35 +24,35 @@ const Dashboard = () => {
 		datasets: [
 			{
 				label: "Happy",
-				data: [80, 85, 78, 90, 75, 88],
+				data: [90, 80, 85, 88, 70, 60],
 				borderColor: "yellow",
 				backgroundColor: "rgba(255, 255, 0, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Sad",
-				data: [20, 30, 40, 35, 25, 15],
+				data: [30, 40, 50, 60, 45, 30],
 				borderColor: "blue",
 				backgroundColor: "rgba(0, 0, 255, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Angry",
-				data: [10, 15, 20, 25, 30, 20],
+				data: [25, 35, 30, 40, 45, 35],
 				borderColor: "red",
 				backgroundColor: "rgba(255, 0, 0, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Calm",
-				data: [70, 65, 80, 75, 85, 90],
+				data: [60, 50, 55, 70, 80, 85],
 				borderColor: "green",
 				backgroundColor: "rgba(0, 255, 0, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Fear",
-				data: [5, 10, 15, 20, 25, 30],
+				data: [15, 20, 25, 30, 35, 40],
 				borderColor: "purple",
 				backgroundColor: "rgba(128, 0, 128, 0.2)",
 				tension: 0.4,
@@ -67,7 +67,7 @@ const Dashboard = () => {
 		labels: ["Smiling", "Not Smiling"],
 		datasets: [
 			{
-				data: [72, 28],
+				data: [63, 37],
 				backgroundColor: ["orange", "lightgray"],
 			},
 		],
@@ -140,7 +140,7 @@ const Dashboard = () => {
 					{gender && <p>Gender: {gender}</p>}
 				</div>
 			</div>
-			<h2 className={styles.title2}>Question: {questions && questions.length > 0 ? questions[0].content : 'Loading...'}</h2>
+			<h2 className={styles.title2}>Question: {questions && questions.length > 0 ? questions[2].content : 'Loading...'}</h2>
 			<div className={styles["graphs-container"]}>
 				{/* 折れ線グラフ */}
 				<div className={styles["line-graph"]}>
@@ -157,14 +157,14 @@ const Dashboard = () => {
 			<div className={styles.summary}>
 				<h2>Summary</h2>
 				<textarea id="summary" name="summary">
-				The problem that brought me here is related to feeling overwhelmed by daily responsibilities. I often struggle to balance my studies, work, and personal life, which has led to stress and burnout. This constant pressure is affecting my ability to focus and enjoy activities that I once found fulfilling.
+				My hope for resolving this problem is to learn better time management skills and find ways to cope with stress. I want to feel more in control of my schedule and reduce the negative impact of stress on my health and well-being. I would like to regain my enthusiasm for things I enjoy and improve my overall quality of life.
 				</textarea>
 			</div>
 			<div className={styles.arrow}>
-			<Link to="/dash5" className={styles.prevButton}>
+			<Link to="/dash2" className={styles.prevButton}>
 				<img src="/arrow_left.png" alt="Previous" className={styles.prev} />
 			</Link>
-			<Link to="/dash2" className={styles.nextButton}>
+			<Link to="/dash4" className={styles.nextButton}>
 				<img src="/arrow_right.png" alt="Next" className={styles.next} />
 			</Link>
 			</div>

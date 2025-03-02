@@ -7,6 +7,11 @@ import Talk from "../pages/Talk";
 import Record from "../pages/Record";
 import Search from "../pages/Search";
 import Dashboard from "../pages/Dashboard";
+import Dashboard2 from "../pages/Dashboard2";
+import Dashboard3 from "../pages/Dashboard3";
+import Dashboard4 from "../pages/Dashboard4";
+import Dashboard5 from "../pages/Dashboard5";
+import DashboardC from "../pages/DashboardCouns";
 import SampleApiData from "../pages/SampleApiData";
 import VideoUpload from "../pages/VideoUpload";
 import NotFound from "../pages/NotFound";
@@ -22,6 +27,11 @@ const AppRoutes = () => {
       <Route path="/record" element={<Record />} />
       <Route path="/search" element={<Search />} />
       <Route path="/dash" element={<Dashboard />} />
+      <Route path="/dash2" element={<Dashboard2 />} />
+      <Route path="/dash3" element={<Dashboard3 />} />
+      <Route path="/dash4" element={<Dashboard4 />} />
+      <Route path="/dash5" element={<Dashboard5 />} />
+      <Route path="/dash-c" element={<DashboardC />} />
       <Route path="/sample-api-data" element={<SampleApiData />} />
       <Route path="/video-upload" element={<VideoUpload />} />
       <Route path="*" element={<NotFound />} />

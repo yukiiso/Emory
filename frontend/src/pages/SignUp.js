@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../components/SignIn.module.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -19,11 +19,14 @@ const SignUp = () => {
             [name]: value,
         }));
     };
+
+    const navigate = useNavigate();
     
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Signing up with:", formData);
         // TODO: APIリクエストの実装
+        navigate('/talk');
     };
 
     return (

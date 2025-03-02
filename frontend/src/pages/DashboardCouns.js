@@ -153,13 +153,7 @@ const Dashboard = () => {
 					<Pie data={pieData} />
 				</div>
 			</div>
-			{/* Counsellorじゃなかったら表示する */}
-			<div className={styles.summary}>
-				<h2>Summary</h2>
-				<textarea id="summary" name="summary">
-				The problem that brought me here is related to feeling overwhelmed by daily responsibilities. I often struggle to balance my studies, work, and personal life, which has led to stress and burnout. This constant pressure is affecting my ability to focus and enjoy activities that I once found fulfilling.
-				</textarea>
-			</div>
+			
 			<div className={styles.arrow}>
 			<Link to="/dash5" className={styles.prevButton}>
 				<img src="/arrow_left.png" alt="Previous" className={styles.prev} />

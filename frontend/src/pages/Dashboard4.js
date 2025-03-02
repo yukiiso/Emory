@@ -24,35 +24,35 @@ const Dashboard = () => {
 		datasets: [
 			{
 				label: "Happy",
-				data: [80, 85, 78, 90, 75, 88],
+				data: [75, 65, 80, 90, 85, 80],
 				borderColor: "yellow",
 				backgroundColor: "rgba(255, 255, 0, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Sad",
-				data: [20, 30, 40, 35, 25, 15],
+				data: [40, 45, 55, 50, 60, 55],
 				borderColor: "blue",
 				backgroundColor: "rgba(0, 0, 255, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Angry",
-				data: [10, 15, 20, 25, 30, 20],
+				data: [30, 40, 35, 45, 50, 40],
 				borderColor: "red",
 				backgroundColor: "rgba(255, 0, 0, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Calm",
-				data: [70, 65, 80, 75, 85, 90],
+				data: [65, 60, 55, 50, 65, 70],
 				borderColor: "green",
 				backgroundColor: "rgba(0, 255, 0, 0.2)",
 				tension: 0.4,
 			},
 			{
 				label: "Fear",
-				data: [5, 10, 15, 20, 25, 30],
+				data: [10, 15, 20, 25, 30, 35],
 				borderColor: "purple",
 				backgroundColor: "rgba(128, 0, 128, 0.2)",
 				tension: 0.4,
@@ -67,7 +67,7 @@ const Dashboard = () => {
 		labels: ["Smiling", "Not Smiling"],
 		datasets: [
 			{
-				data: [72, 28],
+				data: [57, 43],
 				backgroundColor: ["orange", "lightgray"],
 			},
 		],
@@ -140,7 +140,7 @@ const Dashboard = () => {
 					{gender && <p>Gender: {gender}</p>}
 				</div>
 			</div>
-			<h2 className={styles.title2}>Question: {questions && questions.length > 0 ? questions[0].content : 'Loading...'}</h2>
+			<h2 className={styles.title2}>Question: {questions && questions.length > 0 ? questions[3].content : 'Loading...'}</h2>
 			<div className={styles["graphs-container"]}>
 				{/* 折れ線グラフ */}
 				<div className={styles["line-graph"]}>
@@ -157,14 +157,14 @@ const Dashboard = () => {
 			<div className={styles.summary}>
 				<h2>Summary</h2>
 				<textarea id="summary" name="summary">
-				The problem that brought me here is related to feeling overwhelmed by daily responsibilities. I often struggle to balance my studies, work, and personal life, which has led to stress and burnout. This constant pressure is affecting my ability to focus and enjoy activities that I once found fulfilling.
+				I enjoy activities like reading, going for walks in nature, and spending time with close friends. These activities help me relax and recharge, but I often feel too busy to make time for them. It would be great to find a better balance and engage more in these activities without feeling guilty or overwhelmed.
 				</textarea>
 			</div>
 			<div className={styles.arrow}>
-			<Link to="/dash5" className={styles.prevButton}>
+			<Link to="/dash3" className={styles.prevButton}>
 				<img src="/arrow_left.png" alt="Previous" className={styles.prev} />
 			</Link>
-			<Link to="/dash2" className={styles.nextButton}>
+			<Link to="/dash5" className={styles.nextButton}>
 				<img src="/arrow_right.png" alt="Next" className={styles.next} />
 			</Link>
 			</div>
