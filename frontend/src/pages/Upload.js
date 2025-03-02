@@ -45,7 +45,7 @@ const UploadForm = () => {
       }
     } catch (error) {
       console.error('Upload failed:', error);
-      alert('File upload failed');
+      alert('Upload failed:', error);
     }
   };
 

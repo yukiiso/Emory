@@ -20,12 +20,21 @@ bucket = client.bucket(bucket_name)  # Updated method
 # Function to upload files to Google Cloud Storage
 def upload_to_gcs(file, filename):
     try:
+        if not bucket:
+            raise ValueError("GCS Bucket not initialized!")
+
         blob = bucket.blob(filename)
-        blob.upload_from_file(file, content_type=file.content_type)  # Ensure correct MIME type
+        blob.upload_from_file(file, content_type=file.content_type)
         return blob.public_url
+
+    except ValueError as ve:
+        print(f"Bucket Error: {ve}")
+        return None
+
     except Exception as e:
         print(f"Error uploading {filename} to GCS: {e}")
         return None
+
 
 # Define file upload route (Handles both video & audio)
 @upload_bp.route('/upload', methods=['POST'])

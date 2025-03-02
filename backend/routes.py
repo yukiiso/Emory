@@ -3,7 +3,7 @@
 from flask import Blueprint, jsonify, render_template
 from backend.api.dynamo_api import dynamo_bp
 from backend.api.sql_api import sql_bp
-from backend.upload import upload_video_bp, upload_audio_bp
+from backend.upload import upload_bp
 from backend.utils import utils_bp
 
 # API Blueprint
@@ -18,8 +18,7 @@ def register_blueprints(app):
     # Register Child Blueprints
     db_bp.register_blueprint(dynamo_bp, url_prefix='/dynamo')  
     db_bp.register_blueprint(sql_bp, url_prefix='/sql')  
-    media_bp.register_blueprint(upload_video_bp, url_prefix='/video')  # Separate video blueprint
-    media_bp.register_blueprint(upload_audio_bp, url_prefix='/audio')  # Separate audio blueprint
+    media_bp.register_blueprint(upload_bp, url_prefix='/upload')  # Separate video blueprint
 
     api_bp.register_blueprint(db_bp, url_prefix='/db')  
 
