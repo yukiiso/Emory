@@ -1,7 +1,7 @@
 import os
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS
-from config import AWSClient
+from backend.config import AWSClient
 
 rekognition_bp = Blueprint('rekognition', __name__)
 rekognition_client = AWSClient.init_rekognition_client()

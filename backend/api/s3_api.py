@@ -1,7 +1,7 @@
 import uuid
 from flask import Blueprint, jsonify, request
 from werkzeug.utils import secure_filename
-from config import S3_BUCKET, AWSClient
+from backend.config import S3_BUCKET, AWSClient
 
 
 s3_bp = Blueprint('s3_bp', __name__)

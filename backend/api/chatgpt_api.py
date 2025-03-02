@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from config import OPENAI_API_KEY
+from backend.config import OPENAI_API_KEY
 import requests
 
 # Blueprint for chatGPT AI
