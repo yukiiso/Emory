@@ -10,6 +10,7 @@ const SignUp = () => {
         username: "",
         email: "",
         password: "",
+        category: 0, // default to "No" (0) for counsellor
     });
 
     const handleChange = (e) => {
@@ -19,11 +20,39 @@ const SignUp = () => {
             [name]: value,
         }));
     };
+
+    const handleRadioChange = (e) => {
+        const { value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            category: value === "1" ? 1 : 0, // set category to 1 if "Yes" and 0 if "No"
+        }));
+    };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => { // Add async here
         e.preventDefault();
         console.log("Signing up with:", formData);
-        // TODO: APIリクエストの実装
+        try {
+            // Send the form data to your backend
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                console.log('User created successfully:', data);
+                // Redirect to the login page or other page on success
+            } else {
+                console.log('Error:', data.message);
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+        }
     };
 
     return (
@@ -65,11 +94,13 @@ const SignUp = () => {
                 </div>
                 <div className={styles["radio-group"]}>
                     <p>Are you a counsellor?</p>
-                    <label for="yes">Yes
-                        <input type="radio" id="yes" name="radio" value="1" />
+                    <label htmlFor="yes">Yes
+                        <input type="radio" id="yes" name="radio" value="1" onChange={handleRadioChange} 
+                                checked={formData.category === 1}/>
                     </label>
-                    <label for="no">No
-                        <input type="radio" id="no" name="radio" value="0" />
+                    <label htmlFor="no">No
+                        <input type="radio" id="no" name="radio" value="0" onChange={handleRadioChange} 
+                                checked={formData.category === 0}/>
                     </label>
                 </div>
                 <button type="submit" className={styles.button}>Sign Up</button>
