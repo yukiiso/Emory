@@ -22,7 +22,7 @@ const Search = () => {
     };
 
     const handleSelectUser = (username) => {
-        navigate(`/dashboard?user=${username}`);
+        navigate(`/dash?user=${username}`);
     };
     return (
         <div className={styles["page-container"]}>
