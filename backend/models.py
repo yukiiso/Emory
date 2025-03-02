@@ -62,8 +62,11 @@ class VoiceAnalysis(db.Model):
     id              = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id         = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # use user_id instead of username
     question_id     = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    speed           = db.Column(db.Float, default=0.0)
-    pulse           = db.Column(db.Float, default=0.0)
+    transcript      = db.Column(db.String(255), nullable=False)
+    mixed           = db.Column(db.Float, default=0.0)
+    negative        = db.Column(db.Float, default=0.0)
+    neutral         = db.Column(db.Float, default=0.0)
+    positive        = db.Column(db.Float, default=0.0)
     
     user            = db.relationship('User', backref='voice_analysis', lazy=True)
     question        = db.relationship('Question', backref='voice_analysis', lazy=True)
