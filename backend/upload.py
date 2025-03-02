@@ -3,9 +3,8 @@ import os
 from google.cloud import storage
 from config import google_credentials_path
 
-# Create blueprints for video and audio upload
-upload_video_bp = Blueprint('upload_video_bp', __name__)
-upload_audio_bp = Blueprint('upload_audio_bp', __name__)
+# Create a single blueprint for uploads
+upload_bp = Blueprint('upload_bp', __name__)
 
 # Google Cloud Storage setup
 if google_credentials_path:
@@ -16,62 +15,48 @@ else:
 # Connect to GCS
 client = storage.Client()
 bucket_name = "hackathon-2025-bucket-git"
-bucket = client.get_bucket(bucket_name)
+bucket = client.bucket(bucket_name)  # Updated method
 
 # Function to upload files to Google Cloud Storage
 def upload_to_gcs(file, filename):
-    blob = bucket.blob(filename)
-    blob.upload_from_file(file)
-    return blob.public_url  # Return the public URL of the uploaded file
+    try:
+        blob = bucket.blob(filename)
+        blob.upload_from_file(file, content_type=file.content_type)  # Ensure correct MIME type
+        return blob.public_url
+    except Exception as e:
+        print(f"Error uploading {filename} to GCS: {e}")
+        return None
 
-# Define video upload route
-@upload_video_bp.route('/upload', methods=['POST'])
-def upload_video():
+# Define file upload route (Handles both video & audio)
+@upload_bp.route('/upload', methods=['POST'])
+def upload_file():
     video_file = request.files.get('video')
-
-    if not video_file:
-        return jsonify({"error": "No video file provided"}), 400
-
-    # Retrieve additional form data
-    username = request.form.get('username')
-    qid = request.form.get('qid')
-
-    if not username or not qid:
-        return jsonify({"error": "Username or QID missing"}), 400
-
-    # Generate a unique filename for the video
-    video_filename = f"{username}_{qid}_v.webm"
-
-    # Upload video to GCS
-    video_url = upload_to_gcs(video_file, video_filename)
-
-    return jsonify({
-        "message": "Video uploaded successfully",
-        "video_url": video_url
-    }), 200
-
-# Define audio upload route
-@upload_audio_bp.route('/upload', methods=['POST'])
-def upload_audio():
     audio_file = request.files.get('audio')
-
-    if not audio_file:
-        return jsonify({"error": "No audio file provided"}), 400
-
-    # Retrieve additional form data
     username = request.form.get('username')
     qid = request.form.get('qid')
 
     if not username or not qid:
-        return jsonify({"error": "Username or QID missing"}), 400
+        return jsonify({"error": "Username and QID are required"}), 400
 
-    # Generate a unique filename for the audio
-    audio_filename = f"{username}_{qid}_a.webm"
+    response_data = {}
 
-    # Upload audio to GCS
-    audio_url = upload_to_gcs(audio_file, audio_filename)
+    # Upload video if provided
+    if video_file:
+        video_filename = f"{username}_{qid}_v.webm"
+        video_url = upload_to_gcs(video_file, video_filename)
+        if not video_url:
+            return jsonify({"error": "Video upload failed"}), 500
+        response_data["video_url"] = video_url
+
+    # Upload audio if provided
+    if audio_file:
+        audio_filename = f"{username}_{qid}_a.webm"
+        audio_url = upload_to_gcs(audio_file, audio_filename)
+        if not audio_url:
+            return jsonify({"error": "Audio upload failed"}), 500
+        response_data["audio_url"] = audio_url
 
     return jsonify({
-        "message": "Audio uploaded successfully",
-        "audio_url": audio_url
+        "message": "Files uploaded successfully",
+        **response_data
     }), 200
