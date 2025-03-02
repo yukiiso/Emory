@@ -8,9 +8,7 @@ from backend.seed import seed_database
 def create_app(test=False):
     """Flask アプリを作成するファクトリ関数"""
     app = Flask(__name__)
-    CORS(app, resources={
-        r"/api/*": {"origins": "*"},    # Allow all origins for `/api` routes
-    })    
+    CORS(app, origins="http://localhost:3000")
 
     if test:
         # ✅ テスト環境用の設定

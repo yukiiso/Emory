@@ -29,26 +29,29 @@ const SignUp = () => {
         }));
     };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("Signing up with:", formData);
-
-        fetch('http://localhost:5001/api/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-        .then(response => response.json())  // Parse the JSON response
-        .then(data => {
-            console.log('User created successfully:', data);
-            // Redirect to the login page or other page on success
-        })
-        .catch(error => {
+        try {
+            const response = await fetch('http://localhost:5001/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
             console.error('Error during signup:', error);
-        });
+        }
     };
+    
 
     return (
         <div className={styles["page-container"]}>
