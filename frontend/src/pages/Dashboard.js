@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../components/Dashboard.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { API_URL } from "../config";
 import { Line, Pie, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale, ArcElement } from "chart.js";
 
@@ -11,18 +12,19 @@ const Dashboard = () => {
 	const location = useLocation();
 	const queryParams = new URLSearchParams(location.search);
 	const username = queryParams.get("user");
+	
 	// Get the name, age, gender from database
-	const name = "John";
-	const age = 22;
+	const name = "Michael Jackson";
+	const age = 66;
 	const gender = "Male";
 
 	// 折れ線グラフのデータ
 	const lineData = {
-		labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00"], // 時間
+		labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00"],
 		datasets: [
 			{
 				label: "Happy",
-				data: [80, 85, 78, 90, 75, 88], // 各時間の度合い (0-100%)
+				data: [80, 85, 78, 90, 75, 88],
 				borderColor: "yellow",
 				backgroundColor: "rgba(255, 255, 0, 0.2)",
 				tension: 0.4,
@@ -57,6 +59,8 @@ const Dashboard = () => {
 			},
 		],
 	};
+
+	// Smiling Data
 	
 	// 円グラフのデータ
 	const pieData = {
@@ -69,19 +73,54 @@ const Dashboard = () => {
 		],
 	};
 
+	// Speed Data
+
 	// 棒グラフのデータ
 	const barData = {
-		labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00"], // 時間軸
+		labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00"],
 		datasets: [
 			{
 				label: "Speaking Speed (WPM)",
-				data: [120, 150, 130, 140, 110, 160], // 話すスピード（例: 単語/分）
-				backgroundColor: "rgba(54, 162, 235, 0.6)", // 青色
+				data: [120, 150, 130, 140, 110, 160],
+				backgroundColor: "rgba(54, 162, 235, 0.6)",
 				borderColor: "blue",
 				borderWidth: 1,
 			},
 		],
 	};
+
+	// Question from database
+	const [questions, setData] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	// useEffect(() => {
+    //     // APIからデータを取得
+    //     fetch(`${API_URL}/api/db/sql/Question`)
+    //         .then((response) => {
+    //             if (!response.ok) {
+    //                 throw new Error("Network response was not ok");
+    //             }
+    //             return response.json();
+    //         })
+    //         .then((questions) => {
+    //             setData(questions);
+    //             setLoading(false);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching data:", error);
+    //             setError(error.message);
+    //             setLoading(false);
+    //         });
+    // }, []);
+
+    // if (loading) {
+    //     return <div>Loading...</div>;
+    // }
+
+    // if (error) {
+    //     return <div>Error: {error}</div>;
+    // }
 
 	return (
 		<div className={styles["page-container"]}>
@@ -94,6 +133,7 @@ const Dashboard = () => {
 				</div>
 			</div>
 			<h2 className={styles.title2}>Question: What is the concern or problem that brought you here?</h2>
+			{/* {questions && <h2 className={styles.title2}>Question: {questions}</h2>} */}
 			<div className={styles["graphs-container"]}>
 				{/* 折れ線グラフ */}
 				<div className={styles["line-graph"]}>
