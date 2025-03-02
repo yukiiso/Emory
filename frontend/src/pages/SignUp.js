@@ -34,7 +34,7 @@ const SignUp = () => {
         console.log("Signing up with:", formData);
         try {
             // Send the form data to your backend
-            const response = await fetch('/signup', {
+            const response = await fetch('http://localhost:5001/api/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -5,13 +5,13 @@ from backend.api.sql_api import sql_bp
 from backend.api.chatgpt_api import chatgpt_bp
 from backend.api.s3_api import s3_bp
 from backend.api.rekognition_api import rekognition_bp
+from backend.api.sign_up_api import signup_bp
 from backend.api.sns_api import sns_bp
 from backend.utils import utils_bp
 
 # API Blueprint
 api_bp = Blueprint('api_bp', __name__)
 db_bp = Blueprint('db_bp', __name__)
-signup_bp = Blueprint('api_bp', __name__)
 
 
 def register_blueprints(app):
@@ -25,11 +25,11 @@ def register_blueprints(app):
     api_bp.register_blueprint(s3_bp, url_prefix='/s3')
     api_bp.register_blueprint(chatgpt_bp, url_prefix='/chatgpt')
     api_bp.register_blueprint(db_bp, url_prefix='/db')
+    api_bp.register_blueprint(signup_bp, url_prefix='/signup')
 
     # Register Parent Blueprints
     app.register_blueprint(api_bp, url_prefix='/api')
-    app.register_blueprint(api_bp, url_prefix='/signup')
-    app.register_blueprint(api_bp, url_prefix='/signin')
+    # app.register_blueprint(api_bp, url_prefix='/signin')
     app.register_blueprint(utils_bp)
 
 @api_bp.route('/health', methods=['GET'])

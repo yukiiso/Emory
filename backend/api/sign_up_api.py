@@ -1,11 +1,18 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 from werkzeug.security import generate_password_hash
-from app import db
+from backend.models import db
 from models import User
+
+signup_bp = Blueprint('signup_bp', __name__)
 
 app = Flask(__name__)
 
-@app.route('/signup', methods=['POST'])
+@signup_bp.route('/test', methods=['GET'])
+def test_signup_route():
+    return jsonify({"message": "Signup route is working!"})
+
+
+@signup_bp.route('/', methods=['POST'])
 def signup():
     data = request.get_json()
 
