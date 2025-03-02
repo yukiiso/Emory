@@ -11,7 +11,7 @@ const Talk = () => {
 
     const handleQuestionSelect = (question) => {
         setSelectedQuestion(question);
-        navigate("/record", { state: { question } });  // history.pushからnavigateに変更
+        navigate("/record", { state: { question } });
     };
     
     return (

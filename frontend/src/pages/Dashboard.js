@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../components/Dashboard.module.css";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale, ArcElement } from "chart.js";
 
@@ -51,6 +51,7 @@ const Dashboard = () => {
 					{gender && <p>Gender: {gender}</p>}
 				</div>
 			</div>
+			<h2 className={styles.title2}>Question: What is the concern or problem that brought you here?</h2>
 			<div className={styles["graphs-container"]}>
 				{/* 折れ線グラフ */}
 				<div className={styles["line-graph"]}>
@@ -69,6 +70,14 @@ const Dashboard = () => {
 				<textarea id="summary" name="summary">
 				At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
 				</textarea>
+			</div>
+			<div className={styles.arrow}>
+			<Link to="/talk" className={styles.prevButton}>
+				<img src="/arrow_left.png" alt="Previous" className={styles.prev} />
+			</Link>
+			<Link to="/talk" className={styles.nextButton}>
+				<img src="/arrow_right.png" alt="Next" className={styles.next} />
+			</Link>
 			</div>
 		</div>
 	);
