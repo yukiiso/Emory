@@ -64,6 +64,7 @@ const VideoRecorder = () => {
 	setCameraActive(false);
 	};
 
+	// StorageにSave機能追加
 	// ⬇️ 動画をダウンロード
 	const downloadVideo = () => {
 	const a = document.createElement("a");
@@ -91,6 +92,7 @@ const VideoRecorder = () => {
 				<h3>Recorded Video:</h3>
 				<video src={videoURL} width="400" height="300" controls />
 				<br />
+				{/* TODO: DownloadじゃなくてSaveしなきゃいけない */}
 				<button className={styles.buttonDesign} onClick={downloadVideo}>Download Video</button>
 			</div>
 			)}
