@@ -19,8 +19,8 @@ def register_blueprints(app):
     db_bp.register_blueprint(dynamo_bp, url_prefix='/dynamo')  
     db_bp.register_blueprint(sql_bp, url_prefix='/sql')
     
-    api_bp.register_blueprint(sns_bp, url_prefix='sns')
-    api_bp.register_blueprint(rekognition_bp, url_prefix='rekognition')
+    api_bp.register_blueprint(sns_bp, url_prefix='/sns')
+    api_bp.register_blueprint(rekognition_bp, url_prefix='/rekognition')
     api_bp.register_blueprint(s3_bp, url_prefix='/s3')
     api_bp.register_blueprint(chatgpt_bp, url_prefix='/chatgpt')
     api_bp.register_blueprint(db_bp, url_prefix='/db')
