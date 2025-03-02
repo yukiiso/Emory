@@ -1,5 +1,5 @@
-from app import create_app
-from config import FLASK_HOST, FLASK_PORT, FLASK_DEBUG
+from backend.app import create_app
+from backend.config import FLASK_HOST, FLASK_PORT, FLASK_DEBUG
 
 app = create_app(test=False)
 
