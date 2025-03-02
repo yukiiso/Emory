@@ -9,7 +9,7 @@ CORS(app, resources={
         r"/api/*": {"origins": "*"},    # Allow all origins for `/api` routes
     })   
 
-@app.route('/signin', methods=['POST'])
+@app.route('/', methods=['POST'])
 def signin():
     data = request.get_json()
 

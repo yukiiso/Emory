@@ -47,8 +47,10 @@ const SignUp = () => {
     
             const data = await response.json();
             console.log(data);
+            console.log("Signup successful:", data);
         } catch (error) {
             console.error('Error during signup:', error);
+            alert(`Signup failed: ${error.message}`);
         }
     };
     
