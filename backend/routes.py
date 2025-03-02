@@ -11,6 +11,7 @@ from backend.utils import utils_bp
 # API Blueprint
 api_bp = Blueprint('api_bp', __name__)
 db_bp = Blueprint('db_bp', __name__)
+signup_bp = Blueprint('api_bp', __name__)
 
 
 def register_blueprints(app):
@@ -27,6 +28,7 @@ def register_blueprints(app):
 
     # Register Parent Blueprints
     app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(api_bp, url_prefix='/signup')
     app.register_blueprint(utils_bp)
 
 @api_bp.route('/health', methods=['GET'])

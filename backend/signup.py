@@ -5,7 +5,7 @@ from models import User
 
 app = Flask(__name__)
 
-@app.route('/api/signup', methods=['POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
 
