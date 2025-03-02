@@ -1,5 +1,7 @@
 プロジェクトのセットアップや管理を簡単にするためのスクリプトを置く場所
 
+[Localhost Flask API Health Check](http://localhost:5001/api/health)
+
 [Localhost Frontend Sign Up](http://localhost:3000/sign-up)
 
 [Localhost Frontend Talk](http://localhost:3000/talk)
@@ -26,5 +28,9 @@ curl -X POST http://localhost:5001/api/transcribe/start_transcription \
 
 ChatGPT: 
 ```
-
+curl -X POST http://localhost:5001/api/chatgpt/summary \
+     -H "Content-Type: application/json" \
+     -d '{
+           "text": "During our last session, the client expressed a deep sense of frustration regarding their work-life balance. They mentioned that despite trying to manage their time effectively, they often feel overwhelmed by the constant demands from their job and the pressure to meet deadlines. This has been affecting their ability to enjoy personal time, and they fear it is starting to impact their overall well-being, both physically and emotionally. The client also shared that they are seeking strategies to better manage stress and improve their productivity without sacrificing their mental health."
+         }'
 ```
